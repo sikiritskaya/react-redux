@@ -4,10 +4,12 @@ import { Routes, Route } from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainer";
 import UserProfileContainer from "./components/UserProfile/UserProfileContainer";
 import styled from "styled-components";
+import Context from "./context";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import getUsers from "./store/actions/getUsersAction";
-import getPosts from "./store/actions/getPostsAction";
+import getUsers from "./api/users";
+import getPosts from "./api/posts";
+import { setUsers, setPosts } from "./store/redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = styled.header`
   grid-column: 1 / span 2;
@@ -30,22 +32,28 @@ const Layout = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUsers());
-    dispatch(getPosts());
+    getUsers().then((user) => dispatch(setUsers(user)));
+    getPosts().then((post) => dispatch(setPosts(post)));
   }, []);
 
+  const value = useSelector((state) => {
+    return state;
+  });
+
   return (
-    <Wrapper>
-      <Header>Header</Header>
-      <Navbar />
-      <Routes>
-        <Route path="/posts" element={<PostsContainer />} />
-        <Route path="/users/*" element={<UsersContainer />} />
-        <Route path="/userProfile" element={<UserProfileContainer />}>
-          <Route path=":userId" element={<UserProfileContainer />} />
-        </Route>
-      </Routes>
-    </Wrapper>
+    <Context.Provider value={value}>
+      <Wrapper>
+        <Header>Header</Header>
+        <Navbar />
+        <Routes>
+          <Route path="/posts" element={<PostsContainer />} />
+          <Route path="/users/*" element={<UsersContainer />} />
+          <Route path="/userProfile" element={<UserProfileContainer />}>
+            <Route path=":userId" element={<UserProfileContainer />} />
+          </Route>
+        </Routes>
+      </Wrapper>
+    </Context.Provider>
   );
 };
 

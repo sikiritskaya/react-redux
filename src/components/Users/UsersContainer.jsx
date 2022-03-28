@@ -1,15 +1,16 @@
-import { useSelector } from "react-redux";
+import { useContext } from "react";
+import Context from "../../context";
 import Preloader from "../commonComponents/Preloader";
 import Users from "./Users";
 
-const UsersContainer = () => { 
-  const users = useSelector((state)=> state.users)
+const UsersContainer = () => {
+  const value = useContext(Context);
 
-  if (!users) {
+  if (!value.users) {
     return <Preloader />;
   }
 
-  return <Users users={users} />;
+  return <Users users={value.users} />;
 };
 
 export default UsersContainer;

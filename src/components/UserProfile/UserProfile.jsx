@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import { useContext } from "react";
 import styled from "styled-components";
+import Context from "../../context";
 
 const Title = styled.div`
   font-weight: bold;
@@ -9,13 +10,13 @@ const Title = styled.div`
 `;
 
 const Wrapper = styled.div`
-  border: solid 1px rgb(128, 128, 128);
+  border: solid 1px rgb(128,128,128);
   border-radius: 5px;
   padding: 20px;
 `;
 
 const UserProfile = (props) => {
-  const { users, posts } = useSelector((state) => state);
+  const { users, posts } = useContext(Context);
   const { userId } = props;
 
   return (
@@ -51,3 +52,4 @@ const UserProfile = (props) => {
 };
 
 export default UserProfile;
+
