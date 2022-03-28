@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import getUsers from "./store/actions/getUsersAction";
 import getPosts from "./store/actions/getPostsAction";
+import useToggle from "./hooks/useToggle";
+
 
 const Header = styled.header`
   grid-column: 1 / span 2;
@@ -27,6 +29,7 @@ const Wrapper = styled.section`
 `;
 
 const Layout = () => {
+  const[isVisible, toggleVisible] = useToggle(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,7 +39,11 @@ const Layout = () => {
 
   return (
     <Wrapper>
-      <Header>Header</Header>
+      <Header><button onClick={toggleVisible}>Greeting</button>
+      {isVisible && (
+        <>Have a good day</>
+      )}
+      </Header>
       <Navbar />
       <Routes>
         <Route path="/posts" element={<PostsContainer />} />

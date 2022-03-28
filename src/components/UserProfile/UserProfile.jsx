@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import PropTypes from 'prop-types'
 
 const Title = styled.div`
   font-weight: bold;
@@ -49,5 +50,9 @@ const UserProfile = (props) => {
     </Wrapper>
   );
 };
+
+UserProfile.propTypes={
+  userId: PropTypes.string.isRequired
+}
 
 export default UserProfile;
