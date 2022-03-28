@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const StyleUser = styled.div`
   border: solid 1px rgb(128, 128, 128);
@@ -27,4 +28,9 @@ const User = (props) => {
   );
 };
 
+User.propTypes = {
+  name: PropTypes.string.isRequired,
+  company: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+};
 export default User;

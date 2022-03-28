@@ -1,5 +1,6 @@
 import User from "./User/User";
 
+
 const Users = (props) => {
   const { users } = props;
 
@@ -16,5 +17,6 @@ const Users = (props) => {
     </div>
   );
 };
+
 
 export default Users;
